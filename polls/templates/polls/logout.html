@@ -1,0 +1,12 @@
+{% extends "polls/basic.html" %}
+
+{% block title %} Выход {% endblock %}
+
+{% block content %}
+   <h2>Выход</h2>
+   <p>Вы успешно вышли с сайта.</p>
+{% endblock %}
+
+В базовом шаблоне изменим ссылку Выход:
+
+<a class="dropdown-item" href="{% url 'polls:logout' %}">Выйти</a>
