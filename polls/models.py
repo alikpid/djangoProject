@@ -2,6 +2,19 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+from django.db import models
+from django.contrib.auth.models import User
+from django.core.validators import FileExtensionValidator
+from os.path import splitext
+
+
+def get_timestamp_path(instance, filename):
+    return '%s%s' % (datetime.now().timestamp(), splitext(filename)[1])
+
+
+class AdvUser(User):
+    img = models.ImageField(max_length=200, upload_to=get_timestamp_path, blank=True, null=True,
+                            validators=[FileExtensionValidator(allowed_extensions=['png', 'jpg', 'jpeg'])])
 
 
 class Question(models.Model):
