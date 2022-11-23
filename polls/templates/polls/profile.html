@@ -1,12 +1,20 @@
 {% extends "polls/basic.html" %}
-
+{% load thumbnail %}
+{% load static %}
 {% load bootstrap4 %}
-
 {% block title %} Профиль пользователя {% endblock %}
 
 {% block content %}
    <h2>Профиль пользователя {{ user.username }}</h2>
    {% if user.first_name and user.last_name %}
+<!--    <img class="rounded-circle account-img" src="{{ user.profile.img.url }}">-->
+
+        {% if advuser.img %}
+        <img class="mr-3" src="{% thumbnail advuser.img 'default' %}">
+        {% else %}
+        <img class="rounded-circle account-img" src="{% static 'main/empty.jpg' %}">
+        {% endif %}
+
        <p>Здравствуйте, {{ user.first_name }} {{ user.last_name }} </p>
    {% else %}
        <p>Здравствуйте! </p>

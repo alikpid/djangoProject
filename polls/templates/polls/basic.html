@@ -20,15 +20,15 @@
            <div class="dropdown-menu">
                <a class="dropdown-item" href="{% url 'polls:profile_change' %}">Изменить личные данные</a>
                <div class="dropdown-divider"></div>
-               <a class="dropdown-item" href="#">Выйти</a>
+               <a class="dropdown-item" href="{% url 'polls:logout' %}">Выйти</a>
                <div class="dropdown-divider"></div>
                <a class="dropdown-item" href="#">Удалить</a>
                <a class="dropdown-item" href="{% url 'polls:profile' %}">Моя страница</a>
            </div>
        </div>
           {% else %}
-       <a class="p-2 text-dark" href="#">Регистрация</a>
-       <a class="p-2 text-dark" href="#">Вход</a>
+       <a class="p-2 text-dark" href="{% url 'polls:register' %}">Регистрация</a>
+       <a class="p-2 text-dark" href="{% url 'polls:login' %}">Вход</a>
           {% endif %}
    </div>
    <div class="row">

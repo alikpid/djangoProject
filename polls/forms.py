@@ -37,17 +37,20 @@ class RegisterUserForm(forms.ModelForm):
             )}
             raise ValidationError(errors)
 
+    def clean_avatar(self):
+        img = self.cleaned_data['img']
+        return img
+
     def save(self, commit=True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data['password1'])
-        user.is_active = False
-        user.is_activated = False
+        user.is_active = True
+        user.is_activated = True
         if commit:
             user.save()
-        user_registrated.send(RegisterUserForm, instance=user)
         return user
 
     class Meta:
         model = AdvUser
         fields = ('username', 'password1', 'password2',
-                  'first_name', 'last_name')
+                  'first_name', 'last_name', 'img')

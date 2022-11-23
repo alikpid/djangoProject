@@ -1,15 +1,14 @@
 import datetime
-
 from django.db import models
 from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
-from os.path import splitext
+from django.utils.crypto import get_random_string
 
 
 def get_timestamp_path(instance, filename):
-    return '%s%s' % (datetime.now().timestamp(), splitext(filename)[1])
+    return 'polls/file'.join([get_random_string(5) + '_' + filename])
 
 
 class AdvUser(User):

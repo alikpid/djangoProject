@@ -12,9 +12,11 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
-
+from django.views.generic import CreateView
+from .forms import RegisterUserForm
 from .forms import ChangeUserInfoForm
 from .models import AdvUser
+from django.views.generic.base import TemplateView
 
 
 class BBLoginView(LoginView):
@@ -46,6 +48,17 @@ class ChangeUserInfoView(SuccessMessageMixin, LoginRequiredMixin,
         if not queryset:
             queryset = self.get_queryset()
         return get_object_or_404(queryset, pk=self.user_id)
+
+
+class RegisterUserView(CreateView):
+    model = AdvUser
+    template_name = 'polls/register_user.html'
+    form_class = RegisterUserForm
+    success_url = reverse_lazy('polls:register_done')
+
+
+class RegisterDoneView(TemplateView):
+    template_name = 'polls/register_done.html'
 
 
 class IndexView(generic.ListView):
